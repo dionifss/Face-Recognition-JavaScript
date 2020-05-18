@@ -43,11 +43,11 @@ async function start() {
 }
 
 function loadLabeledImages() {
-  const labels = ["Nate", "Dioni"];
+  const labels = ["Dioni"];
   return Promise.all(
     labels.map(async (label) => {
       const descriptions = [];
-      for (let i = 1; i <= 3; i++) {
+      for (let i = 1; i <= 5; i++) {
         const img = await faceapi.fetchImage(
           `https://raw.githubusercontent.com/dionifss/Face-Recognition-JavaScript/master/labeled_images/${label}/${i}.jpg`
         );
