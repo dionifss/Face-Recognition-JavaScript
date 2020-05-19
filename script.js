@@ -33,6 +33,7 @@ async function start() {
       faceMatcher.findBestMatch(d.descriptor)
     );
     results.forEach((result, i) => {
+      console.log(result._label);
       const box = resizedDetections[i].detection.box;
       const drawBox = new faceapi.draw.DrawBox(box, {
         label: result.toString(),
@@ -47,7 +48,7 @@ function loadLabeledImages() {
   return Promise.all(
     labels.map(async (label) => {
       const descriptions = [];
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 2; i++) {
         const img = await faceapi.fetchImage(
           `https://raw.githubusercontent.com/dionifss/Face-Recognition-JavaScript/master/labeled_images/${label}/${i}.jpg`
         );
@@ -56,6 +57,7 @@ function loadLabeledImages() {
           .withFaceLandmarks()
           .withFaceDescriptor();
         descriptions.push(detections.descriptor);
+        console.log(detections.descriptor.toString());
       }
 
       return new faceapi.LabeledFaceDescriptors(label, descriptions);
